@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Counter</title>
+    <title>Birthday Countdown</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
             padding: 20px;
-            background-color: black;
+            background: linear-gradient(45deg, #2d1b69, #4a148c, #3e2723, #1a0033);
+            background-size: 400% 400%;
+            animation: gradient-bg 15s ease infinite;
             font-family: 'Poppins', sans-serif;
             display: flex;
             flex-direction: column;
@@ -18,12 +20,36 @@
             align-items: center;
             min-height: 100vh;
             box-sizing: border-box;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .firework {
+            position: absolute;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #ff69b4;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #ff1493, 0 0 12px #ffc0cb;
+            left: -2px;
+            top: -2px;
+        }
+        
+        @keyframes gradient-bg {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
         
         .title {
             font-family: 'Sacramento', cursive;
             font-size: 48px;
-            color: #555555;
             text-align: center;
             position: fixed;
             top: 32px;
@@ -34,174 +60,21 @@
             justify-content: center;
             z-index: 100;
             text-transform: lowercase;
+            background: linear-gradient(45deg, #ffffff, #e6e6fa, #dda0dd, #ffffff);
+            background-size: 300% 300%;
+            animation: title-gradient 10s ease-in-out infinite;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        @keyframes title-gradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
         
         .counter-container {
             text-align: center;
-        }
-        
-        .flower-container {
-            width: 384px;
-            height: 384px;
-            margin: 0 auto 64px auto;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.2s ease-in-out;
-        }
-        
-        .petal-layer {
-            position: absolute;
-            border-radius: 50%;
-        }
-        
-
-        
-        .petal-layer {
-            position: absolute;
-            width: 200px;
-            height: 200px;
-            left: 50%;
-            top: 50%;
-            margin-left: -100px;
-            margin-top: -100px;
-            transition: transform 0.15s ease-in-out;
-        }
-        
-        .days-layer {
-            animation: days-animation 150s linear infinite;
-            transform-origin: center center;
-        }
-        
-        .months-layer {
-            animation: months-animation 100s linear infinite;
-            transform-origin: center center;
-        }
-        
-        @keyframes days-animation {
-            0% { transform: rotate(0deg) scale(1); }
-            2.5% { transform: rotate(30deg) scale(1.02); }
-            5% { transform: rotate(60deg) scale(1); }
-            7.5% { transform: rotate(90deg) scale(1.01); }
-            10% { transform: rotate(120deg) scale(1); }
-            12.5% { transform: rotate(150deg) scale(1.02); }
-            15% { transform: rotate(180deg) scale(1); }
-            17.5% { transform: rotate(210deg) scale(1.01); }
-            20% { transform: rotate(240deg) scale(1); }
-            22.5% { transform: rotate(270deg) scale(1.02); }
-            25% { transform: rotate(300deg) scale(1); }
-            27.5% { transform: rotate(330deg) scale(1.01); }
-            30% { transform: rotate(360deg) scale(1); }
-            32.5% { transform: rotate(390deg) scale(1.02); }
-            35% { transform: rotate(420deg) scale(1); }
-            37.5% { transform: rotate(450deg) scale(1.01); }
-            40% { transform: rotate(480deg) scale(1); }
-            42.5% { transform: rotate(510deg) scale(1.02); }
-            45% { transform: rotate(540deg) scale(1); }
-            47.5% { transform: rotate(570deg) scale(1.01); }
-            50% { transform: rotate(600deg) scale(1); }
-            52.5% { transform: rotate(630deg) scale(1.02); }
-            55% { transform: rotate(660deg) scale(1); }
-            57.5% { transform: rotate(690deg) scale(1.01); }
-            60% { transform: rotate(720deg) scale(1); }
-            62.5% { transform: rotate(750deg) scale(1.02); }
-            65% { transform: rotate(780deg) scale(1); }
-            67.5% { transform: rotate(810deg) scale(1.01); }
-            70% { transform: rotate(840deg) scale(1); }
-            72.5% { transform: rotate(870deg) scale(1.02); }
-            75% { transform: rotate(900deg) scale(1); }
-            77.5% { transform: rotate(930deg) scale(1.01); }
-            80% { transform: rotate(960deg) scale(1); }
-            82.5% { transform: rotate(990deg) scale(1.02); }
-            85% { transform: rotate(1020deg) scale(1); }
-            87.5% { transform: rotate(1050deg) scale(1.01); }
-            90% { transform: rotate(1080deg) scale(1); }
-            92.5% { transform: rotate(1110deg) scale(1.02); }
-            95% { transform: rotate(1140deg) scale(1); }
-            97.5% { transform: rotate(1170deg) scale(1.01); }
-            100% { transform: rotate(1200deg) scale(1); }
-        }
-        
-        @keyframes months-animation {
-            0% { transform: rotate(0deg) scale(1); }
-            3.75% { transform: rotate(-45deg) scale(1.05); }
-            7.5% { transform: rotate(-90deg) scale(1); }
-            11.25% { transform: rotate(-135deg) scale(1.03); }
-            15% { transform: rotate(-180deg) scale(1); }
-            18.75% { transform: rotate(-225deg) scale(1.05); }
-            22.5% { transform: rotate(-270deg) scale(1); }
-            26.25% { transform: rotate(-315deg) scale(1.03); }
-            30% { transform: rotate(-360deg) scale(1); }
-            33.75% { transform: rotate(-405deg) scale(1.05); }
-            37.5% { transform: rotate(-450deg) scale(1); }
-            41.25% { transform: rotate(-495deg) scale(1.03); }
-            45% { transform: rotate(-540deg) scale(1); }
-            48.75% { transform: rotate(-585deg) scale(1.05); }
-            52.5% { transform: rotate(-630deg) scale(1); }
-            56.25% { transform: rotate(-675deg) scale(1.03); }
-            60% { transform: rotate(-720deg) scale(1); }
-            63.75% { transform: rotate(-765deg) scale(1.05); }
-            67.5% { transform: rotate(-810deg) scale(1); }
-            71.25% { transform: rotate(-855deg) scale(1.03); }
-            75% { transform: rotate(-900deg) scale(1); }
-            78.75% { transform: rotate(-945deg) scale(1.05); }
-            82.5% { transform: rotate(-990deg) scale(1); }
-            86.25% { transform: rotate(-1035deg) scale(1.03); }
-            90% { transform: rotate(-1080deg) scale(1); }
-            93.75% { transform: rotate(-1125deg) scale(1.05); }
-            97.5% { transform: rotate(-1170deg) scale(1); }
-            100% { transform: rotate(-1200deg) scale(1); }
-        }
-        
-        @keyframes heartbeat-subtle {
-            0%, 100% { transform: rotate(var(--rotation)) scale(1); }
-            15% { transform: rotate(var(--rotation)) scale(1.02); }
-            30% { transform: rotate(var(--rotation)) scale(1); }
-            45% { transform: rotate(var(--rotation)) scale(1.01); }
-        }
-        
-        @keyframes heartbeat-strong {
-            0%, 100% { transform: rotate(var(--rotation)) scale(1); }
-            15% { transform: rotate(var(--rotation)) scale(1.05); }
-            30% { transform: rotate(var(--rotation)) scale(1); }
-            45% { transform: rotate(var(--rotation)) scale(1.03); }
-        }
-        
-
-        
-        .petal {
-            position: absolute;
-            border-radius: 50% 50% 50% 50% / 80% 80% 20% 20%;
-        }
-        
-        .petal.active {
-            background: linear-gradient(45deg, #ff1493, #00ffff, #ff6b35, #7b68ee);
-            background-size: 400% 400%;
-            animation: gradient-shift 40s linear infinite;
-        }
-        
-        .petal.inactive {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        @keyframes rotate-clockwise {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        
-        @keyframes rotate-counter {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(-360deg); }
-        }
-        
-        @keyframes gradient-shift {
-            0%, 100% { background-position: 0% 50%; }
-            25% { background-position: 100% 50%; }
-            50% { background-position: 50% 100%; }
-            75% { background-position: 50% 0%; }
         }
         
         #counter {
@@ -227,35 +100,38 @@
             width: 2ch;
             display: inline-block;
             text-align: center;
-        }
-        
-        #seconds {
-            background: linear-gradient(45deg, #ff1493, #00ffff, #ff6b35, #7b68ee);
+            background: linear-gradient(45deg, #ff1493, #00ffff, #ff6b35, #7b68ee, #ff1493);
             background-size: 400% 400%;
-            animation: gradient-shift 40s linear infinite;
+            animation: gradient-text 8s ease-in-out infinite;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
         
-        #minutes {
-            opacity: 0.25 !important;
-        }
-        
-        #hours {
-            opacity: 0.5 !important;
+        @keyframes gradient-text {
+            0%, 100% { background-position: 0% 50%; }
+            25% { background-position: 100% 50%; }
+            50% { background-position: 50% 100%; }
+            75% { background-position: 50% 0%; }
         }
         
         .counter-label {
             font-size: 12px;
-            color: #555;
+            color: #e6e6fa;
             letter-spacing: 1px;
             margin-top: 8px;
+            text-shadow: 0 0 10px rgba(230, 230, 250, 0.5);
+            animation: glow 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 10px rgba(230, 230, 250, 0.5); }
+            to { text-shadow: 0 0 20px rgba(230, 230, 250, 0.8), 0 0 30px rgba(230, 230, 250, 0.6); }
         }
         
         #text {
             font-size: 16px;
-            color: #555555;
+            color: #cccccc;
             text-align: center;
             margin-top: 20px;
         }
@@ -264,7 +140,7 @@
             font-family: 'Poppins', sans-serif;
             font-size: 12px;
             font-weight: 300;
-            color: #555555;
+            color: rgba(255, 255, 255, 0.5);
             text-align: center;
             position: fixed;
             bottom: 32px;
@@ -295,7 +171,6 @@
 <body>
     <div class="title">mirnabel</div>
     <div class="counter-container">
-        <div class="flower-container" id="flower"></div>
         <div id="counter">
             <div class="counter-segment">
                 <div class="counter-value" id="days">00</div>
@@ -314,130 +189,35 @@
                 <div class="counter-label">SECS</div>
             </div>
         </div>
-        <div id="text">Since the miracle started</div>
+        <div id="text">Until the day that's yours, entirely.</div>
     </div>
-    <div class="footer">All was born on 05.04.2025</div>
+    <div class="footer">Birthday countdown for August 11th</div>
 
     <script>
-        const targetDate = new Date('2025-05-04T23:00:00');
-        
-        function getDaysInMonth(date) {
-            return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
-        }
-        
-        function createPetal(angle, layer, totalCount) {
-            const petal = document.createElement('div');
-            petal.className = 'petal';
-            
-            const radius = layer === 'days' ? 90 : layer === 'months' ? 135 : 180;
-            const petalWidth = (360 / totalCount) * 1.2;
-            const petalHeight = radius;
-            
-            petal.style.width = `${petalWidth}px`;
-            petal.style.height = `${petalHeight}px`;
-            petal.style.transform = `rotate(${angle}deg) translateY(-${petalHeight}px) rotateX(${Math.sin(angle * Math.PI / 180) * 15}deg)`;
-            
-            return petal;
-        }
-        
-        let lastFlowerState = { years: -1, months: -1, days: -1 };
-        
-        function createPetal(angle, layer, totalCount, isActive) {
-            const petal = document.createElement('div');
-            petal.className = `petal ${isActive ? 'active' : 'inactive'}`;
-            
-            // Calculate position on the circle
-            const radius = layer === 'days' ? 50 : 100;
-            const petalWidth = 20;
-            const petalHeight = 100;
-            
-            // Convert angle to radians
-            const angleRad = (angle * Math.PI) / 180;
-            
-            // Calculate position
-            const x = Math.cos(angleRad) * radius;
-            const y = Math.sin(angleRad) * radius;
-            
-            petal.style.width = `${petalWidth}px`;
-            petal.style.height = `${petalHeight}px`;
-            petal.style.left = `calc(50% + ${x}px - ${petalWidth/2}px)`;
-            petal.style.top = `calc(50% + ${y}px - ${petalHeight/2}px)`;
-            petal.style.transform = `rotate(${angle + 90}deg)`;
-            
-            // Make days layer 50% transparent and slightly blurred
-            if (layer === 'days') {
-                petal.style.opacity = '0.5';
-                petal.style.filter = 'blur(0.5px)';
-            }
-            
-            return petal;
-        }
-        
-        function updateFlower(totalDays) {
-            const currentDate = new Date();
-            const daysInCurrentMonth = getDaysInMonth(currentDate);
-            const totalMonths = Math.floor(totalDays / 30);
-            const currentDayInMonth = totalDays % 30;
-            
-            // Only update if flower state changed
-            if (lastFlowerState.months === totalMonths && lastFlowerState.days === currentDayInMonth) {
-                return;
-            }
-            
-            lastFlowerState = { months: totalMonths, days: currentDayInMonth };
-            
-            const flower = document.getElementById('flower');
-            flower.innerHTML = '';
-            
-            // Days layer - always show all days in current month
-            const daysLayer = document.createElement('div');
-            daysLayer.className = 'petal-layer days-layer';
-            // Reverse loop to make first petal on top
-            for (let i = daysInCurrentMonth - 1; i >= 0; i--) {
-                const angle = (360 / daysInCurrentMonth) * i;
-                const isActive = i < currentDayInMonth;
-                daysLayer.appendChild(createPetal(angle, 'days', daysInCurrentMonth, isActive));
-            }
-            flower.appendChild(daysLayer);
-            
-            // Months layer - always show 12 months
-            const monthsLayer = document.createElement('div');
-            monthsLayer.className = 'petal-layer months-layer';
-            // Reverse loop to make first petal on top
-            for (let i = 11; i >= 0; i--) {
-                const angle = (360 / 12) * i;
-                const isActive = i < totalMonths;
-                monthsLayer.appendChild(createPetal(angle, 'months', 12, isActive));
-            }
-            flower.appendChild(monthsLayer);
-        }
+        const targetDate = new Date('2025-08-11T00:00:00');
         
         let lastValues = { days: '', hours: '', minutes: '', seconds: '' };
         
         function updateCounter() {
             const now = new Date();
-            const diff = now - targetDate;
+            const diff = targetDate - now;
             
             if (diff < 0) {
-                updateValue('days', '00');
-                updateValue('hours', '00');
-                updateValue('minutes', '00');
-                updateValue('seconds', '00');
-                updateFlower(0);
+                const counter = document.getElementById('counter');
+                counter.innerHTML = '<div style="background: linear-gradient(45deg, #ff1493, #00ffff, #ff6b35, #7b68ee, #ff1493); background-size: 400% 400%; animation: gradient-text 8s ease-in-out infinite; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-size: inherit; line-height: 1;">Happy Birthday Gorgeous!</div>';
+                document.getElementById('text').textContent = 'Today is all about your smile that I can\'t forget.';
                 return;
             }
             
-            const totalDays = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
             const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((diff % (1000 * 60)) / 1000);
             
-            updateValue('days', totalDays.toString().padStart(2, '0'));
+            updateValue('days', days.toString().padStart(2, '0'));
             updateValue('hours', hours.toString().padStart(2, '0'));
             updateValue('minutes', minutes.toString().padStart(2, '0'));
             updateValue('seconds', seconds.toString().padStart(2, '0'));
-            
-            updateFlower(totalDays);
         }
         
         function updateValue(id, newValue) {
@@ -454,28 +234,45 @@
             }
         }
         
-        // Add heartbeat effect with JavaScript
-        function heartbeat() {
-            const flower = document.getElementById('flower');
-            
-            // Create a heartbeat effect by scaling the entire flower
-            flower.style.transform = 'scale(1.08)';
-            setTimeout(() => {
-                flower.style.transform = 'scale(1)';
-                setTimeout(() => {
-                    flower.style.transform = 'scale(1.04)';
-                    setTimeout(() => {
-                        flower.style.transform = 'scale(1)';
-                    }, 200);
-                }, 200);
-            }, 200);
-        }
-        
-        // Run heartbeat every 2 seconds
-        setInterval(heartbeat, 2000);
-        
         updateCounter();
         setInterval(updateCounter, 1000);
+        
+        function createFirework() {
+            const firework = document.createElement('div');
+            firework.className = 'firework';
+            const x = Math.random() * (window.innerWidth - 200) + 100;
+            const y = Math.random() * (window.innerHeight - 200) + 100;
+            firework.style.left = x + 'px';
+            firework.style.top = y + 'px';
+            
+            for (let i = 0; i < 16; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                const angle = (i * 22.5) * Math.PI / 180;
+                const distance = 60 + Math.random() * 80;
+                const duration = 1.2 + Math.random() * 0.8;
+                
+                const endX = Math.cos(angle) * distance;
+                const endY = Math.sin(angle) * distance;
+                
+                particle.style.transition = `transform ${duration}s ease-out, opacity ${duration}s ease-out`;
+                
+                firework.appendChild(particle);
+                
+                setTimeout(() => {
+                    particle.style.transform = `translate(${endX}px, ${endY}px)`;
+                    particle.style.opacity = '0';
+                }, 10);
+            }
+            
+            document.body.appendChild(firework);
+            
+            setTimeout(() => {
+                firework.remove();
+            }, 2500);
+        }
+        
+        setInterval(createFirework, 1200);
     </script>
 </body>
 </html>
